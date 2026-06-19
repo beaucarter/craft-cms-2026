@@ -75,7 +75,7 @@ Create a dedicated SSH key pair for GitHub Actions. Put its public key in `/home
 - `DROPLET_SSH_PRIVATE_KEY`: the private deployment key
 - `DROPLET_KNOWN_HOSTS`: output from `ssh-keyscan -H DROPLET_IP`
 
-Add an environment variable named `DEPLOY_ENABLED` with the value `true` when the Droplet is ready. Until then, production deployment is safely skipped.
+Add a repository variable named `DEPLOY_ENABLED` with the value `true` when the Droplet is ready. Until then, production deployment is safely skipped.
 
 A push to `main` then deploys that exact commit. Pull requests and pushes also run Composer validation, PHP linting, and the frontend build.
 
