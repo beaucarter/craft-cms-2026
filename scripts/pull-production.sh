@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SYNC_ENV_FILE="${SYNC_ENV_FILE:-.env.sync}"
+if [[ -f "$SYNC_ENV_FILE" ]]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$SYNC_ENV_FILE"
+  set +a
+fi
+
 PRODUCTION_HOST="${PRODUCTION_HOST:-}"
 PRODUCTION_USER="${PRODUCTION_USER:-deploy}"
 PRODUCTION_PATH="${PRODUCTION_PATH:-/opt/craft-cms-2026}"
 PRODUCTION_SSH_KEY="${PRODUCTION_SSH_KEY:-}"
 ASSUME_YES=false
+HOST_ARGUMENT_SET=false
 
 for argument in "$@"; do
   case "$argument" in
     --yes) ASSUME_YES=true ;;
     *)
-      if [[ -z "$PRODUCTION_HOST" ]]; then
+      if [[ "$HOST_ARGUMENT_SET" == false ]]; then
         PRODUCTION_HOST="$argument"
+        HOST_ARGUMENT_SET=true
       else
         echo "Unexpected argument: $argument" >&2
         exit 1
@@ -23,7 +33,7 @@ done
 
 if [[ -z "$PRODUCTION_HOST" ]]; then
   echo "Usage: $0 [--yes] DROPLET_IP" >&2
-  echo "Or set PRODUCTION_HOST in your shell." >&2
+  echo "Or copy .env.sync.example to .env.sync and set PRODUCTION_HOST." >&2
   exit 1
 fi
 

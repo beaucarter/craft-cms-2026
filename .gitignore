@@ -1,4 +1,5 @@
 /.env
+/.env.sync
 /.idea
 /vendor
 /node_modules

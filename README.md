@@ -35,13 +35,15 @@ Project Config under `config/project/` must be committed after settings or conte
 
 Code and Project Config flow from local to production through GitHub. Database content and uploads flow from production back to local on demand. Do not connect local Craft directly to the production database or attempt bidirectional database merging.
 
-To replace your local database and uploads with the current production copies:
+Store the connection details once in the git-ignored local sync file:
 
 ```bash
-./scripts/pull-production.sh DROPLET_IP
+cp .env.sync.example .env.sync
+# Set PRODUCTION_HOST in .env.sync, then run:
+./scripts/pull-production.sh
 ```
 
-The command asks for confirmation, connects as the non-root `deploy` user, imports the database into DDEV, mirrors `web/uploads`, and runs Craft migrations and Project Config locally. Set `PRODUCTION_HOST`, `PRODUCTION_USER`, or `PRODUCTION_SSH_KEY` in your shell if you prefer not to pass connection details each time.
+The command asks for confirmation, connects as the non-root `deploy` user, imports the database into DDEV, mirrors `web/uploads`, and runs Craft migrations and Project Config locally. A Droplet IP argument or shell variables can still override the defaults when needed.
 
 ## Deploy to a DigitalOcean Droplet
 

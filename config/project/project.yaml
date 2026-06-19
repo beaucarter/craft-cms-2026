@@ -1,4 +1,4 @@
-dateModified: 1781826733
+dateModified: 1781829671
 email:
   fromEmail: admin@example.test
   fromName: 'Craft CMS 2026'
@@ -7,6 +7,61 @@ meta:
   __names__:
     6e568ccf-d172-4c06-95ef-141a42f4ff20: 'Craft CMS 2026' # Craft CMS 2026
     8a9eda8c-9c9e-44c6-afc8-56c21c0db11c: 'Craft CMS 2026' # Craft CMS 2026
+    817c8b09-529e-4fb9-926e-fc3e9c2ca49e: 'Contact Form' # Contact Form
+    fe14a025-bf9f-413a-a074-52d965c0fe1a: New # New
+plugins:
+  assetrev:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  async-queue:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 5.6.0.0
+  codefield:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  field-manager:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  formie:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.4.12
+  imager-x:
+    edition: lite
+    enabled: true
+    schemaVersion: 4.0.0
+  navigation:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.1.2
+  retour:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.12
+  sendgrid:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  seomatic:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.13
+  simplemap:
+    edition: lite
+    enabled: true
+    schemaVersion: 3.4.2
+  smith:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
 system:
   edition: solo
   live: true
