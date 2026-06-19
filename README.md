@@ -2,16 +2,6 @@
 
 A reusable Craft CMS 5 starter with Tailwind CSS 4, Vite, DDEV, PostgreSQL, Docker, and GitHub-to-DigitalOcean Droplet deployment.
 
-## Create a new site automatically
-
-With GitHub CLI and DigitalOcean `doctl` authenticated, create a private repository, local clone, configured Sydney Droplet, local/production Craft installation, and GitHub deployment pipeline in one guided command:
-
-```bash
-./scripts/new-site.sh my-new-site "My New Site"
-```
-
-The command shows the current Droplet price and asks for confirmation before creating billable infrastructure. Run `./scripts/new-site.sh --help` for public repositories, alternate regions/sizes, dry runs, and other options.
-
 ## What is included
 
 - Craft CMS 5 and Twig
