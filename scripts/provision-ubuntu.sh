@@ -33,7 +33,6 @@ ufw allow 443/udp
 ufw --force enable
 
 if [[ -n "$REPOSITORY_URL" ]]; then
-  rmdir "$APP_PATH"
   sudo -u "$DEPLOY_USER" git clone "$REPOSITORY_URL" "$APP_PATH"
 fi
 
@@ -41,4 +40,3 @@ echo
 echo "Droplet provisioned."
 echo "Add the GitHub Actions public key to /home/$DEPLOY_USER/.ssh/authorized_keys."
 echo "Then create $APP_PATH/.env.production from .env.production.example."
-
