@@ -31,6 +31,18 @@ Use `ddev pnpm dev` in a second terminal while styling. It watches Twig, CSS, an
 
 Project Config under `config/project/` must be committed after settings or content-model changes. Production has admin changes disabled; deployments apply migrations and Project Config automatically with `craft up`.
 
+## Sync production content to local
+
+Code and Project Config flow from local to production through GitHub. Database content and uploads flow from production back to local on demand. Do not connect local Craft directly to the production database or attempt bidirectional database merging.
+
+To replace your local database and uploads with the current production copies:
+
+```bash
+./scripts/pull-production.sh DROPLET_IP
+```
+
+The command asks for confirmation, connects as the non-root `deploy` user, imports the database into DDEV, mirrors `web/uploads`, and runs Craft migrations and Project Config locally. Set `PRODUCTION_HOST`, `PRODUCTION_USER`, or `PRODUCTION_SSH_KEY` in your shell if you prefer not to pass connection details each time.
+
 ## Deploy to a DigitalOcean Droplet
 
 Use an Ubuntu LTS Droplet with at least 2 GB RAM. Add your SSH key during creation. A basic firewall is configured by the provisioning script.
