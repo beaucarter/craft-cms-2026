@@ -1,0 +1,14 @@
+defaultPlacement: end
+handle: mainNavigation
+instructions: 'Primary site navigation.'
+maxNodes: null
+name: 'Main Navigation'
+propagationMethod: all
+showSiteMenu: true
+siteSettings:
+  6e568ccf-d172-4c06-95ef-141a42f4ff20: # Craft CMS 2026
+    enabled: true
+sortOrder: 1
+structure:
+  maxLevels: 2
+  uid: a680c610-9b4e-4779-b57d-2d26f7ad9f30

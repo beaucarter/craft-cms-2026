@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 set -eu
 
-mkdir -p storage/runtime storage/logs web/cpresources web/uploads
-chown -R www-data:www-data storage web/cpresources web/uploads
+mkdir -p storage/runtime storage/logs web/cpresources web/uploads web/imager
+chown -R www-data:www-data storage web/cpresources web/uploads web/imager
 
 if php craft install/check >/dev/null 2>&1; then
   su -s /bin/sh www-data -c 'php craft up --interactive=0'

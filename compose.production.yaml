@@ -10,6 +10,7 @@ x-craft: &craft
     - craft-storage:/var/www/html/storage
     - craft-cpresources:/var/www/html/web/cpresources
     - craft-uploads:/var/www/html/web/uploads
+    - imager-cache:/var/www/html/web/imager
   depends_on:
     database:
       condition: service_healthy
@@ -64,4 +65,5 @@ volumes:
   craft-cpresources:
   craft-storage:
   craft-uploads:
+  imager-cache:
   postgres-data:

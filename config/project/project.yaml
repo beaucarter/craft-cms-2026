@@ -1,13 +1,24 @@
-dateModified: 1781829671
+dateModified: 1781830245
 email:
   fromEmail: admin@example.test
   fromName: 'Craft CMS 2026'
   transportType: craft\mail\transportadapters\Sendmail
+fs:
+  assets:
+    hasUrls: true
+    name: Assets
+    settings:
+      path: '@webroot/uploads'
+    type: craft\fs\Local
+    url: '@web/uploads'
 meta:
   __names__:
+    05fe6f95-ee71-4858-a9a4-e585f2f4123e: Body # Body
     6e568ccf-d172-4c06-95ef-141a42f4ff20: 'Craft CMS 2026' # Craft CMS 2026
     8a9eda8c-9c9e-44c6-afc8-56c21c0db11c: 'Craft CMS 2026' # Craft CMS 2026
     817c8b09-529e-4fb9-926e-fc3e9c2ca49e: 'Contact Form' # Contact Form
+    5664e06d-19ca-4456-9222-ace6221c5486: Assets # Assets
+    25939ce1-0332-4295-87c1-a7c62245c350: 'Main Navigation' # Main Navigation
     fe14a025-bf9f-413a-a074-52d965c0fe1a: New # New
 plugins:
   assetrev:

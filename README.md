@@ -45,6 +45,18 @@ cp .env.sync.example .env.sync
 
 The command asks for confirmation, connects as the non-root `deploy` user, imports the database into DDEV, mirrors `web/uploads`, and runs Craft migrations and Project Config locally. A Droplet IP argument or shell variables can still override the defaults when needed.
 
+## Plugin starter defaults
+
+The template includes an `Assets` local filesystem and volume, a reusable `Body` CKEditor field with image uploads, an empty two-level `Main Navigation`, a default Formie contact-form stencil, persistent Imager X storage, and Asset Rev cache-busting for compiled CSS and JavaScript.
+
+SimpleMap works without credentials using Carto tiles and Nominatim geocoding. Configure site-specific credentials and licenses in each new project for SendGrid, paid plugin editions, premium map providers, and any external Imager storage. Never commit API keys.
+
+The starter infrastructure is generated idempotently with:
+
+```bash
+ddev craft exec "return require 'scripts/setup-starter.php';"
+```
+
 ## Deploy to a DigitalOcean Droplet
 
 Use an Ubuntu LTS Droplet with at least 2 GB RAM. Add your SSH key during creation. A basic firewall is configured by the provisioning script.
