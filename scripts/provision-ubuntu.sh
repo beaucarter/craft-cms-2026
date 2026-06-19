@@ -8,7 +8,13 @@ fi
 
 REPOSITORY_URL="${1:-}"
 DEPLOY_USER="${DEPLOY_USER:-deploy}"
-APP_PATH="/opt/craft-cms-2026"
+APP_PATH="${APP_PATH:-/opt/craft-cms-2026}"
+
+export DEBIAN_FRONTEND=noninteractive
+cloud-init status --wait >/dev/null 2>&1 || true
+while fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock >/dev/null 2>&1; do
+  sleep 5
+done
 
 apt-get update
 apt-get install -y ca-certificates curl git ufw
