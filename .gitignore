@@ -1,0 +1,11 @@
+/.env
+/.idea
+/vendor
+/node_modules
+/web/dist
+/web/uploads
+/.env.production
+/config/license.key
+/.ddev/.env.web
+/backups
+.DS_Store

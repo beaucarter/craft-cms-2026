@@ -1,0 +1,12 @@
+.ddev
+.env
+.env.production
+.git
+.github
+node_modules
+storage/logs/*
+vendor
+web/cpresources/*
+web/dist
+web/uploads
+

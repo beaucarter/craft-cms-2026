@@ -1,0 +1,22 @@
+{% extends '_layouts/base' %}
+
+{% block title %}Craft CMS 2026{% endblock %}
+
+{% block body %}
+  <main class="relative isolate grid min-h-dvh place-items-center overflow-hidden px-6 py-24">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_oklch(0.47_0.18_255_/_0.35),_transparent_38%)]"></div>
+
+    <section class="mx-auto max-w-3xl text-center">
+      <p class="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-brand-500">Craft CMS + Tailwind CSS</p>
+      <h1 class="text-balance text-5xl font-bold tracking-tight sm:text-7xl">A tidy place to begin.</h1>
+      <p class="mx-auto mt-7 max-w-2xl text-pretty text-lg leading-8 text-slate-300">
+        Craft CMS 2026 is ready for content modelling, Twig templates, and whatever the design becomes next.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a class="rounded-full bg-brand-500 px-6 py-3 font-semibold text-white transition hover:bg-brand-700" href="{{ cpUrl('') }}">Open the control panel</a>
+        <a class="rounded-full border border-slate-700 px-6 py-3 font-semibold transition hover:border-slate-500 hover:bg-slate-900" href="https://craftcms.com/docs/5.x/" rel="noreferrer" target="_blank">Read the Craft docs</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}
+

@@ -1,0 +1,67 @@
+name: craft-cms-2026
+
+x-craft: &craft
+  build:
+    context: .
+    target: runtime
+  env_file: ${ENV_FILE:-.env.production}
+  restart: unless-stopped
+  volumes:
+    - craft-storage:/var/www/html/storage
+    - craft-cpresources:/var/www/html/web/cpresources
+    - craft-uploads:/var/www/html/web/uploads
+  depends_on:
+    database:
+      condition: service_healthy
+
+services:
+  app:
+    <<: *craft
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost/health.php"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  queue:
+    <<: *craft
+    command: ["su", "-s", "/bin/sh", "www-data", "-c", "php craft queue/listen --verbose=1 --isolate=1"]
+    healthcheck:
+      disable: true
+
+  database:
+    image: postgres:16-alpine
+    env_file: ${ENV_FILE:-.env.production}
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  caddy:
+    image: caddy:2-alpine
+    env_file: ${ENV_FILE:-.env.production}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+
+volumes:
+  caddy-config:
+  caddy-data:
+  craft-cpresources:
+  craft-storage:
+  craft-uploads:
+  postgres-data:

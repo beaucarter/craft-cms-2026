@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@source "../../templates";
+
+@theme {
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: oklch(0.97 0.02 255);
+  --color-brand-500: oklch(0.62 0.2 255);
+  --color-brand-700: oklch(0.47 0.18 255);
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-brand-500;
+  }
+}
+
