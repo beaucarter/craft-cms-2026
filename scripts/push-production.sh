@@ -81,6 +81,10 @@ remote_database="/tmp/$site_name-local-$timestamp.sql.gz"
 echo "Checking production access..."
 "${ssh_command[@]}" "$PRODUCTION_USER@$PRODUCTION_HOST" "test -d '$PRODUCTION_PATH' && cd '$PRODUCTION_PATH' && docker compose -f compose.production.yaml ps >/dev/null"
 
+echo "Ensuring production is running for backups..."
+"${ssh_command[@]}" "$PRODUCTION_USER@$PRODUCTION_HOST" \
+  "cd '$PRODUCTION_PATH' && docker compose -f compose.production.yaml up -d app"
+
 echo "Creating production backups on the Droplet..."
 "${ssh_command[@]}" "$PRODUCTION_USER@$PRODUCTION_HOST" \
   "cd '$PRODUCTION_PATH' && mkdir -p backups && docker compose -f compose.production.yaml exec -T database sh -lc 'pg_dump --no-owner --no-acl -U \"\$POSTGRES_USER\" \"\$POSTGRES_DB\"' | gzip > 'backups/push-production-database-$timestamp.sql.gz'"
@@ -98,7 +102,7 @@ gzip -dc "$local_database" | sed 's/OWNER TO db;/OWNER TO craft;/g' | gzip > "$p
 echo "Uploading and importing the local database..."
 "${scp_command[@]}" "$production_database" "$PRODUCTION_USER@$PRODUCTION_HOST:$remote_database"
 "${ssh_command[@]}" "$PRODUCTION_USER@$PRODUCTION_HOST" \
-  "cd '$PRODUCTION_PATH' && docker compose -f compose.production.yaml stop app queue caddy && docker compose -f compose.production.yaml exec -T database psql -U craft -d craft -v ON_ERROR_STOP=1 -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public AUTHORIZATION craft;' && gzip -dc '$remote_database' | docker compose -f compose.production.yaml exec -T database psql -U craft -d craft -v ON_ERROR_STOP=1 >/dev/null && rm -f '$remote_database'"
+  "cd '$PRODUCTION_PATH' && docker compose -f compose.production.yaml stop app queue caddy && docker compose -f compose.production.yaml exec -T database psql -U craft -d craft -v ON_ERROR_STOP=1 -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public AUTHORIZATION craft;' && gzip -dc '$remote_database' | docker compose -f compose.production.yaml exec -T database psql -U craft -d craft -v ON_ERROR_STOP=1 >/dev/null && rm -f '$remote_database' && docker compose -f compose.production.yaml up -d app"
 
 if [[ "$SKIP_UPLOADS" == false ]]; then
   echo "Replacing production uploads with local uploads..."
